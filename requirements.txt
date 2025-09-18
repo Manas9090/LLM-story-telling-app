@@ -1,4 +1,3 @@
-streamlit
-openai==0.28
-python-dateutil
-
+streamlit==1.38.0
+openai==0.28.0
+python-dateutil==2.9.0.post0
