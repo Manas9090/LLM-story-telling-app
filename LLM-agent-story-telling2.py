@@ -1,9 +1,9 @@
-import openai 
+import os
+import openai
 import streamlit as st  
 
-# Set your OpenAI API key 
-openai.api_key = ""
-
+# Load your OpenAI API key from environment variable
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Helper function 
 def generate_text(messages, model="gpt-3.5-turbo", max_tokens=300): 
@@ -78,6 +78,9 @@ def main():
 
     if st.button("Generate Story"):
         if user_request.strip():
+            if not openai.api_key:
+                st.error("OpenAI API key not set. Please configure the OPENAI_API_KEY environment variable.")
+                return
             with st.spinner("Crafting your story... ✨"):
                 story = generate_story(user_request)
             st.markdown(story)
